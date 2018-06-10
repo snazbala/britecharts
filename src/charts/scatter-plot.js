@@ -744,7 +744,7 @@ define(function(require) {
                 drawDataPointsValueHighlights(pointData);
             }
 
-            if (isAnimationReady) {
+            if (isAnimationReady || !isAnimated) {
                 highlightDataPoint(pointData);
             }
 
