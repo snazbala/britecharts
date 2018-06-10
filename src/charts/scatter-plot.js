@@ -166,6 +166,7 @@ define(function(require) {
         duration = 500,
 
         hasHollowCircles = false,
+        isAnimationReady = false,
 
         svg,
         chartWidth,
@@ -548,7 +549,10 @@ define(function(require) {
                     .attr('r', (d) => areaScale(d.y))
                     .attr('cx', (d) => xScale(d.x))
                     .attr('cy', (d) => yScale(d.y))
-                    .style('cursor', 'pointer');
+                    .style('cursor', 'pointer')
+                    .on('end', () => {
+                        isAnimationReady = true;
+                    });
             } else {
                 circles
                     .append('circle')
@@ -740,7 +744,9 @@ define(function(require) {
                 drawDataPointsValueHighlights(pointData);
             }
 
-            highlightDataPoint(pointData);
+            if (isAnimationReady) {
+                highlightDataPoint(pointData);
+            }
 
             dispatcher.call('customMouseMove', e, pointData, d3Selection.mouse(e), [chartWidth, chartHeight]);
         }
