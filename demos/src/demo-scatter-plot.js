@@ -80,6 +80,7 @@ function createScatterPlotWithIncreasedAreaAndHollowCircles() {
                 bottom: 45
             })
             .maxCircleArea(15)
+            .isAnimated(true)
             .on('customMouseOver', tooltip.show)
             .on('customMouseMove', function (dataPoint, mousePos, chartSize) {
                 tooltip.title(dataPoint.name);

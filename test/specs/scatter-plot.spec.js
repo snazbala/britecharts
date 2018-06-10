@@ -496,6 +496,10 @@ define(['d3', 'scatter-plot', 'scatterPlotDataBuilder'], function(d3, chart, dat
         });
 
         describe('Point highlighter', () => {
+            beforeEach(() => {
+                scatterPlot.isAnimated(false);
+                containerFixture.datum(dataset).call(scatterPlot);
+            });
 
             it('is successfully initialized on render', () => {
                 let expected = 1;
@@ -540,8 +544,17 @@ define(['d3', 'scatter-plot', 'scatterPlotDataBuilder'], function(d3, chart, dat
         describe('when hasCrossHairs is set to true', () => {
 
             beforeEach(() => {
-                scatterPlot.hasCrossHairs(true);
+                scatterPlot
+                    .isAnimated(false)
+                    .hasCrossHairs(true);
                 containerFixture.datum(dataset).call(scatterPlot);
+            });
+
+            afterEach(() => {
+                containerFixture.remove();
+                f = jasmine.getFixtures();
+                f.cleanUp();
+                f.clearCache();
             });
 
             describe('cross hair lines', () => {

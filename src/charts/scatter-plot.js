@@ -740,7 +740,7 @@ define(function(require) {
             let { mousePos, closestPoint } = getPointProps(e);
             let pointData = getPointData(closestPoint);
 
-            if (hasCrossHairs) {
+            if (hasCrossHairs && (isAnimationReady || !isAnimated)) {
                 drawDataPointsValueHighlights(pointData);
             }
 
